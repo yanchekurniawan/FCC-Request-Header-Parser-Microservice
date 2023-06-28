@@ -22,6 +22,14 @@ app.get("/", function (req, res) {
 // your first API endpoint... 
 const isInvalidDate = (date) => date.toUTCString() === 'Invalid Date'
 
+app.get('/api/whoami', (req, res) => {
+  res.json({
+    ipaddress: req.headers['x-forwarded-for'],
+    language: req.headers['accept-language'],
+    software: req.headers['user-agent']
+  })
+})
+
 app.get('/api/:date', (req, res) => {
   let date = new Date(req.params.date)
 
